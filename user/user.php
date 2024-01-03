@@ -32,56 +32,17 @@ $user = mysqli_fetch_assoc($userResult);
             <div class="side-bar">
                 <nav>
                     <ul>
-                        <li><a href="module/dashboard.php">Dashboard</a></li>
-                        <li><a href="user.php">Data Warga</a></li>
-                        <li><a href="module/transaksi_iuran_user.php">Iuran KAS</a></li>
-                        <li><a href="module/laporan_transaksi_user.php">Laporan Transaksi</a></li>
-                        <li><a href="module/belum_bayar_user.php">Belum Bayar Iuran</a></li>
-                        <li><a href="module/jumlah_kas_user.php">Jumlah KAS</a></li>
-                        <li><a href="class/logout.php">Logout</a></li>
+                        <li><a href="#data-warga">Data Warga</a></li>
+                        <li><a href="#transaksi_iuran_user">Iuran KAS</a></li>
+                        <li><a href="#laporan_transaksi_user">Laporan Transaksi</a></li>
+                        <li><a href="#belum_bayar_user">Belum Bayar Iuran</a></li>
+                        <li><a href="#jumlah_kas_user">Jumlah KAS</a></li>
+                        <li><a href="../logout.php">Logout</a></li>
                     </ul>
                 </nav>
             </div>
 
-            <section id="data-warga" class="col-9">
-                
-                <h2>Data Warga</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>NIK</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>No HP</th>
-                            <th>Alamat</th>
-                            <th>No Rumah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $dataWargaQuery = "SELECT * FROM warga ORDER BY nama ASC"; // Menambahkan ORDER BY
-                        $dataWargaResult = mysqli_query($koneksi, $dataWargaQuery);
-
-                        $nomorBaris = 1; // Inisialisasi nomor baris
-
-                        while ($row = mysqli_fetch_assoc($dataWargaResult)) {
-                            echo "<tr>";
-                            echo "<td>" . $nomorBaris . "</td>";
-                            echo "<td>" . $row["nik"] . "</td>";
-                            echo "<td>" . $row["nama"] . "</td>";
-                            echo "<td>" . $row["jenis_kelamin"] . "</td>";
-                            echo "<td>" . $row["no_hp"] . "</td>";
-                            echo "<td>" . $row["alamat"] . "</td>";
-                            echo "<td>" . $row["no_rumah"] . "</td>";
-                            echo "</tr>";
-
-                            $nomorBaris++; // Inkremen nomor baris
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </section>
+            
         </div>
 
         <footer>
