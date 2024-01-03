@@ -265,6 +265,7 @@ https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115614173/2d19fe4a-
 
 
 ## Halaman user
+<h2> Halaman user </h2>
 
 |  |  |  |
 |-----|------|-----|
@@ -642,6 +643,5 @@ Sintaks php diatas ditaruh disetiap beberapa file untuk memanggil database dari 
             </div>
     ```
 
-### Tampilan Halaman User
-
+<h2>Tampilan Halaman User</h2>
 https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/116700346/ee99dbb5-e696-4f65-b8bf-ba0d0e94de43
