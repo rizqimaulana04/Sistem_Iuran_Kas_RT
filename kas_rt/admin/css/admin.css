@@ -1,0 +1,643 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+}
+
+.side-bar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    min-width: 200px;
+    transition: all 0.3s;
+}
+
+.side-bar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-bar li {
+    margin-bottom: 10px;
+}
+
+.side-bar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.side-bar a:hover {
+    background-color: #555;
+}
+
+.side-bar.closed {
+    margin-left: -200px; 
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column-reverse;
+    }
+    .side-bar {
+        margin-left: 0;
+    }
+    .toggle-btn {
+        margin-right: 20px;
+    }
+}
+
+.toggle-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+    background-color: #555;
+}
+
+.col-9 {
+    flex: 1;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto; 
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        display: inline-block;
+    }
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.action-buttons a:hover {
+    opacity: 0.8;
+}
+
+.edit-button {
+    background-color: #007BFF; 
+}
+
+.edit-button:hover {
+    background-color: #0056b3; 
+}
+
+.delete-button {
+    background-color: #FF3333; 
+}
+
+.delete-button:hover {
+    background-color: #cc0000; 
+}
+
+#tambah-warga-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#tambah-warga-link:hover {
+    background-color: #555;
+}
+
+#tambah-iuran-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#tambah-iuran-link:hover {
+    background-color: #555;
+}
+
+#tambah-warga {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tambah-warga h2 {
+    color: #333;
+}
+
+#tambah-warga form {
+    margin-top: 20px;
+}
+
+#tambah-warga label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#tambah-warga input[type="text"],
+#tambah-warga textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#tambah-warga button {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#tambah-warga button:hover {
+    background-color: #555;
+}
+
+.gender-checkboxes {
+    display: flex;
+    align-items: center;
+}
+
+.gender-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+.gender-checkboxes input[type="checkbox"] + label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000; 
+    background-color: #fff; 
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.gender-checkboxes input[type="checkbox"]:checked + label:before {
+    content: "\2713"; 
+    font-size: 16px;
+    color: #000000; 
+}
+
+.gender-checkboxes label {
+    font-size: 16px;
+    color: #333;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.gender-checkboxes label:hover {
+    cursor: pointer;
+}
+
+#tambah-iuran {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for form title */
+#tambah-iuran h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for form elements */
+#tambah-iuran form {
+    margin-top: 20px;
+}
+
+#tambah-iuran label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#tambah-iuran input[type="date"],
+#tambah-iuran select,
+#tambah-iuran input[type="text"],
+#tambah-iuran textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#tambah-iuran button {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#tambah-iuran button:hover {
+    background-color: #555;
+}
+
+#ubah-warga {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#ubah-warga h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#ubah-warga form {
+    margin-top: 20px;
+}
+
+#ubah-warga label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#ubah-warga input[type="text"],
+#ubah-warga textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#ubah-warga button {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#ubah-warga button:hover {
+    background-color: #555;
+}
+
+.gender-checkboxes {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px; 
+}
+
+.gender-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+.gender-checkboxes input[type="checkbox"] + label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000; 
+    background-color: #fff; 
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.gender-checkboxes input[type="checkbox"]:checked + label:before {
+    content: "\2713"; 
+    font-size: 16px;
+    color: #000000; 
+}
+
+.gender-checkboxes label {
+    font-size: 16px;
+    color: #333;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.gender-checkboxes label:hover {
+    cursor: pointer;
+}
+
+#ubah-transaksi {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#ubah-transaksi h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#ubah-transaksi form {
+    margin-top: 20px;
+}
+
+#ubah-transaksi label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#ubah-transaksi input[type="date"],
+#ubah-transaksi select,
+#ubah-transaksi input[type="text"],
+#ubah-transaksi textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#ubah-transaksi button {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#ubah-transaksi button:hover {
+    background-color: #555;
+}
+
+.jenis-iuran-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+.jenis-iuran-checkboxes input[type="checkbox"] + label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000; 
+    background-color: #fff; 
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.jenis-iuran-checkboxes input[type="checkbox"]:checked + label:before {
+    content: "\2713";
+    font-size: 16px;
+    color: #000000;
+}
+
+.jenis-iuran-checkboxes label {
+    font-size: 16px;
+    color: #333;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.jenis-iuran-checkboxes label:hover {
+    cursor: pointer;
+}
+
+/* tabel transaksi */
+#transaksi-iuran {
+    padding: 20px;
+}
+
+#transaksi-iuran table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#transaksi-iuran th,
+#transaksi-iuran td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#transaksi-iuran th {
+    background-color: #333;
+    color: #fff;
+}
+
+#transaksi-iuran tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#transaksi-iuran tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* tabel laporan */
+#laporan-transaksi {
+    padding: 20px;
+}
+
+#laporan-transaksi table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#laporan-transaksi th,
+#laporan-transaksi td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#laporan-transaksi th {
+    background-color: #333;
+    color: #fff;
+}
+
+#laporan-transaksi tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#laporan-transaksi tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* tabel belum bayar */
+#belum-bayar {
+    padding: 20px;
+}
+
+#belum-bayar table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#belum-bayar th,
+#belum-bayar td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#belum-bayar th {
+    background-color: #333;
+    color: #fff;
+}
+
+#belum-bayar tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#belum-bayar tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* tabel jumlah kas */
+#jumlah-kas {
+    padding: 20px;
+}
+
+#jumlah-kas table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#jumlah-kas th,
+#jumlah-kas td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#jumlah-kas th {
+    background-color: #333;
+    color: #fff;
+}
+
+#jumlah-kas tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#jumlah-kas tbody tr:hover {
+    background-color: #ddd;
+}
+
+#data-warga {
+    padding: 20px;
+}
+
+#data-warga table {
+    margin-top: 20px;
+}
+
+#data-warga th, #data-warga td {
+    border: 1px solid #ccc;
+    padding: 12px;
+}
+
+#data-warga th {
+    background-color: #333;
+    color: #fff;
+}
+
+#data-warga tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#data-warga tbody tr:hover {
+    background-color: #ddd;
+}
