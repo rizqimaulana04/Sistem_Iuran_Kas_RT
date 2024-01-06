@@ -57,13 +57,12 @@ mysqli_close($koneksi);
 <body>
     <div class="container">
         <header class="header">
-            <h1>Sistem Iuran KAS RT</h1>
+            <h1>Iuran KAS RT Kuadrat</h1>
             <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
         </header>
 
         <div class="wrapper">
             <div class="side-bar">
-                <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
                 <nav>
                     <ul>
                         <li><a href="../admin.php#data-warga">Data Warga</a></li>
@@ -107,20 +106,6 @@ mysqli_close($koneksi);
                 </form>
             </section>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const wrapper = document.querySelector('.wrapper');
-                const sidebarToggleBtn = document.querySelector('.toggle-btn');
-
-                sidebarToggleBtn.addEventListener('click', function () {
-                    wrapper.classList.toggle('closed');
-                    const isClosed = wrapper.classList.contains('closed');
-                    sidebarToggleBtn.textContent = isClosed ? '☰' : '✖';
-                });
-            });
-        </script>
-
         <footer>
             <p>&copy; 2024, Teknik Informatika, Universitas Pelita Bangsa, Sistem Iuran Kas RT</p>
         </footer>

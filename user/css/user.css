@@ -63,23 +63,46 @@ body {
     .wrapper {
         flex-direction: column-reverse;
     }
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
     .side-bar {
+        min-width: 10%;
+        font-size: 14px;
+    }
+
+    .side-bar.closed {
         margin-left: 0;
     }
-}
 
-#dashboard {
-    background-color: rgba(255, 255, 255, 0.26);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.76);
-    padding: 20px;
-    margin: 20px;
-    color: #ffffff;
-}
+    .col-9 {
+        padding: 14px;
+    }
 
-#dashboard h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    table {
+        font-size: 12px;
+        overflow-x: auto;
+        display: block;
+        max-width: 100%;
+    }
+
+    .pagination {
+        margin-top: 10px;
+        overflow-x: auto;
+    }
+
+    .pagination a {
+        padding: 6px 12px;
+        margin: 0 2px;
+    }
+
+    .pagination .active {
+        font-weight: bold;
+    }
 }
 
 .col-9 {
@@ -104,18 +127,6 @@ th {
 td {
     padding: 12px;
     text-align: center;
-}
-
-@media only screen and (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    th, td {
-        display: inline-block;
-    }
 }
 
 tfoot {
@@ -155,8 +166,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel transaksi */
-
 #transaksi-iuran {
     padding: 20px;
 }
@@ -182,8 +191,6 @@ footer {
 #transaksi-iuran tbody tr:hover {
     background-color: #ddd;
 }
-
-/* tabel laporan */
 
 #laporan-transaksi {
     padding: 20px;
@@ -211,8 +218,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel belum bayar */
-
 #belum-bayar {
     padding: 20px;
 }
@@ -239,8 +244,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel jumlah kas */
-
 #jumlah-kas {
     padding: 20px;
 }
@@ -265,4 +268,112 @@ footer {
 
 #jumlah-kas tbody tr:hover {
     background-color: #ddd;
+}
+
+.total-semua-kas {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: right;
+    padding: 5px;
+}
+
+.text-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.text-input input[type="text"] {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: #fff;
+    pointer-events: none;
+}
+
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #555;
+}
+
+.welcome-message img {
+    width: 5px; /* Sesuaikan ukuran gambar */
+    height: 5px;
+    margin-right: 5px;
+    border-radius: 5%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.welcome-message:hover img {
+    transform: rotate(360deg);
+}
+
+#dashboard {
+    text-align: left;
+}
+
+.greeting {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.dashboard-info {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+canvas {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

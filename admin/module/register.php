@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Periksa apakah query berhasil dieksekusi
     if ($insertResult) {
         // Tentukan halaman tujuan berdasarkan role
-        $redirectPage = ($role == 1) ? '../admin.php' : '../../user/user.php';
+        $redirectPage = ($role == 1) ? '../admin.php' : '../../user/dashboard.php';
 
         // Redirect ke halaman yang sesuai dengan role
         header("Location: $redirectPage");
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="header-2">
-        <h1>Sistem Iuran Kas RT</h1>
+        <h1>Kas RT Kuadrat</h1>
     </div>
     <div class="register-container">
         <h2>Registrasi Akun</h2>
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <div class="login-link">
-            Sudah punya akun? <a href="../../login.php">Login di sini</a>.
+            Sudah punya akun? <a href="login.php">Login di sini</a>.
         </div>
     </div>
 </body>

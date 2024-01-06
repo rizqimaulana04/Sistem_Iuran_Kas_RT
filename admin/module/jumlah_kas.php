@@ -34,7 +34,16 @@ $bulanResult = mysqli_query($koneksi, $bulanQuery);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jumlah KAS - Sistem Iuran KAS RT</title>
-    <link rel="stylesheet" type="text/css" href="../css/user.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <style>
+        /* Style untuk kolom total semua kas */
+        .total-semua-kas {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: right;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -47,11 +56,11 @@ $bulanResult = mysqli_query($koneksi, $bulanQuery);
             <div class="side-bar">
                 <nav>
                     <ul>
-                        <li><a href="../dashboard.php">Dashboard</a></li>
-                        <li><a href="../user.php">Data Warga</a></li>
-                        <li><a href="transaksi_iuran_user.php">Iuran KAS</a></li>
-                        <li><a href="belum_bayar_user.php">Belum Bayar Iuran</a></li>
-                        <li><a href="jumlah_kas_user.php">Jumlah KAS</a></li>
+                        <li><a href="../admin.php#data-warga">Data Warga</a></li>
+                        <li><a href="transaksi_iuran.php">Iuran KAS</a></li>
+                        <li><a href="laporan_transaksi.php">Laporan Transaksi</a></li>
+                        <li><a href="belum_bayar.php">Belum Bayar Iuran</a></li>
+                        <li><a href="jumlah_kas.php">Jumlah KAS</a></li>
                         <li><a href="../class/logout.php">Logout</a></li>
                     </ul>
                 </nav>

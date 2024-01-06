@@ -11,6 +11,21 @@ include '../../class/koneksi.php';
 $userQuery = "SELECT * FROM users WHERE id=" . $_SESSION["user_id"];
 $userResult = mysqli_query($koneksi, $userQuery);
 $user = mysqli_fetch_assoc($userResult);
+
+// Tangkap data pencarian
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Query untuk mengambil data belum bayar iuran dengan pencarian
+$bulanIni = date('Y-m-d');
+$belumBayarQuery = "SELECT warga.id, warga.nama, warga.jenis_kelamin, warga.no_hp, warga.alamat, warga.no_rumah,
+    MONTH(iuran.tanggal) AS bulan,
+    CASE WHEN iuran.keterangan = 'lunas' THEN 'Lunas' ELSE 'Belum Bayar' END AS status
+    FROM warga
+    LEFT JOIN iuran ON warga.id = iuran.warga_id AND MONTH(iuran.tanggal) = MONTH('$bulanIni')
+    WHERE (iuran.keterangan IS NULL OR iuran.keterangan != 'lunas') AND warga.nama LIKE '%$search%'";
+$belumBayarResult = mysqli_query($koneksi, $belumBayarQuery);
+
+$nomorBaris = 1; // Inisialisasi nomor baris
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +39,7 @@ $user = mysqli_fetch_assoc($userResult);
 <body>
     <div class="container">
         <header class="header">
-            <h1>Sistem Iuran KAS RT</h1>
+            <h1>Iuran KAS RT Kuadrat</h1>
             <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
         </header>
 
@@ -32,10 +47,9 @@ $user = mysqli_fetch_assoc($userResult);
             <div class="side-bar">
                 <nav>
                     <ul>
-                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="../dashboard.php">Dashboard</a></li>
                         <li><a href="../user.php">Data Warga</a></li>
                         <li><a href="transaksi_iuran_user.php">Iuran KAS</a></li>
-                        <li><a href="laporan_transaksi_user.php">Laporan Transaksi</a></li>
                         <li><a href="belum_bayar_user.php">Belum Bayar Iuran</a></li>
                         <li><a href="jumlah_kas_user.php">Jumlah KAS</a></li>
                         <li><a href="../class/logout.php">Logout</a></li>
@@ -45,6 +59,10 @@ $user = mysqli_fetch_assoc($userResult);
 
             <section id="belum-bayar" class="col-9">
                 <h2>Belum Bayar Iuran</h2>
+                <form method="get">
+                    <input type="text" name="search" placeholder="Cari berdasarkan nama..." value="<?php echo $search; ?>">
+                    <button type="submit">Cari</button>
+                </form>
                 <table>
                     <thead>
                         <tr>
@@ -54,15 +72,12 @@ $user = mysqli_fetch_assoc($userResult);
                             <th>No HP</th>
                             <th>Alamat</th>
                             <th>No Rumah</th>
+                            <th>Bulan</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $belumBayarQuery = "SELECT * FROM warga WHERE id NOT IN (SELECT DISTINCT warga_id FROM iuran)";
-                        $belumBayarResult = mysqli_query($koneksi, $belumBayarQuery);
-
-                        $nomorBaris = 1; // Inisialisasi nomor baris
-
                         while ($row = mysqli_fetch_assoc($belumBayarResult)) {
                             echo "<tr>";
                             echo "<td>" . $nomorBaris . "</td>";
@@ -71,9 +86,11 @@ $user = mysqli_fetch_assoc($userResult);
                             echo "<td>" . $row["no_hp"] . "</td>";
                             echo "<td>" . $row["alamat"] . "</td>";
                             echo "<td>" . $row["no_rumah"] . "</td>";
+                            echo "<td>" . date('F', mktime(0, 0, 0, $row["bulan"], 1)) . "</td>";
+                            echo "<td>" . $row["status"] . "</td>";
                             echo "</tr>";
 
-                            $nomorBaris++; // Inkremen nomor baris
+                            $nomorBaris++;
                         }
                         ?>
                     </tbody>
@@ -85,6 +102,5 @@ $user = mysqli_fetch_assoc($userResult);
             <p>&copy; 2024, Teknik Informatika, Universitas Pelita Bangsa, Sistem Iuran Kas RT</p>
         </footer>
     </div>
-
 </body>
 </html>

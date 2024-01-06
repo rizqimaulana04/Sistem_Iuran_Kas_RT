@@ -11,6 +11,35 @@ include '../../class/koneksi.php';
 $userQuery = "SELECT * FROM users WHERE id=" . $_SESSION["user_id"];
 $userResult = mysqli_query($koneksi, $userQuery);
 $user = mysqli_fetch_assoc($userResult);
+
+// Pagination settings
+$resultsPerPage = 5;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $resultsPerPage;
+
+// Search functionality
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$whereClause = empty($search) ? '' : "WHERE 
+    iuran.tanggal LIKE '%$search%' OR 
+    warga.nama LIKE '%$search%'";
+
+$laporanTransaksiQuery = "SELECT iuran.id, iuran.tanggal, warga.nama AS warga, iuran.nominal 
+                        FROM iuran
+                        JOIN warga ON iuran.warga_id = warga.id
+                        $whereClause
+                        ORDER BY iuran.tanggal DESC, warga.nama
+                        LIMIT $offset, $resultsPerPage";
+
+$laporanTransaksiResult = mysqli_query($koneksi, $laporanTransaksiQuery);
+
+// Count total records for pagination
+$countQuery = "SELECT COUNT(*) AS total 
+                FROM iuran
+                JOIN warga ON iuran.warga_id = warga.id
+                $whereClause";
+$countResult = mysqli_query($koneksi, $countQuery);
+$totalRecords = mysqli_fetch_assoc($countResult)['total'];
+$totalPages = ceil($totalRecords / $resultsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +53,12 @@ $user = mysqli_fetch_assoc($userResult);
 <body>
     <div class="container">
         <header class="header">
-            <h1>Sistem Iuran KAS RT</h1>
+            <h1>Iuran KAS RT Kuadrat</h1>
             <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
         </header>
 
         <div class="wrapper">
             <div class="side-bar">
-                <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
                 <nav>
                     <ul>
                         <li><a href="../admin.php#data-warga">Data Warga</a></li>
@@ -44,6 +72,11 @@ $user = mysqli_fetch_assoc($userResult);
             </div>
 
             <section id="laporan-transaksi" class="col-9">
+                <form method="get">
+                    <input type="text" name="search" placeholder="Cari..." value="<?php echo $search; ?>">
+                    <button type="submit">Cari</button>
+                </form>
+
                 <h2>Laporan Transaksi</h2>
                 <table>
                     <thead>
@@ -56,12 +89,7 @@ $user = mysqli_fetch_assoc($userResult);
                     </thead>
                     <tbody>
                         <?php
-                        $laporanTransaksiQuery = "SELECT iuran.id, iuran.tanggal, warga.nama AS warga, iuran.nominal 
-                                                FROM iuran
-                                                JOIN warga ON iuran.warga_id = warga.id";
-                        $laporanTransaksiResult = mysqli_query($koneksi, $laporanTransaksiQuery);
-
-                        $nomorBaris = 1;
+                        $nomorBaris = ($page - 1) * $resultsPerPage + 1;
 
                         while ($row = mysqli_fetch_assoc($laporanTransaksiResult)) {
                             echo "<tr>";
@@ -76,6 +104,28 @@ $user = mysqli_fetch_assoc($userResult);
                         ?>
                     </tbody>
                 </table>
+
+                 <!-- Pagination links -->
+                 <div class="pagination">
+                    <?php if ($page > 1) : ?>
+                        <a href="?page=<?php echo $page - 1; ?>&search=<?php echo $search; ?>" class="prev">&laquo; Previous</a>
+                    <?php endif; ?>
+
+                    <?php
+                    $startPage = max(1, $page - 1);
+                    $endPage = min($totalPages, $page + 1);
+
+                    for ($i = $startPage; $i <= $endPage; $i++) {
+                        $activeClass = ($i == $page) ? 'active' : '';
+                        echo "<a class='$activeClass' href='?page=$i&search=$search'>$i</a>";
+                    }
+                    ?>
+
+                    <?php if ($page < $totalPages) : ?>
+                        <a href="?page=<?php echo $page + 1; ?>&search=<?php echo $search; ?>" class="next">Next &raquo;</a>
+                    <?php endif; ?>
+                </div>
+
             </section>
         </div>
 
@@ -83,18 +133,5 @@ $user = mysqli_fetch_assoc($userResult);
             <p>&copy; 2024, Teknik Informatika, Universitas Pelita Bangsa, Sistem Iuran Kas RT</p>
         </footer>
     </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const wrapper = document.querySelector('.wrapper');
-        const sidebarToggleBtn = document.querySelector('.toggle-btn');
-
-        sidebarToggleBtn.addEventListener('click', function () {
-            wrapper.classList.toggle('closed');
-            const isClosed = wrapper.classList.contains('closed');
-            sidebarToggleBtn.textContent = isClosed ? '☰' : '✖';
-        });
-    });
-    </script>
 </body>
 </html>
