@@ -45,6 +45,7 @@ $user = mysqli_fetch_assoc($userResult);
 
             <section id="dashboard" class="col-9">
                 <h2>Dashboard</h2>
+                <br>
                 <p>Selamat datang di Dashboard Iuran KAS RT, <?php echo $user["nama"]; ?>!</p>
                 <p>Di sini Anda dapat melihat ringkasan informasi mengenai iuran dan keuangan RT.</p>
                 <p>Periksa halaman Iuran KAS untuk melakukan pembayaran iuran dan Laporan Transaksi untuk melihat riwayat transaksi.</p>
