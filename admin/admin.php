@@ -11,6 +11,27 @@ include '../class/koneksi.php';
 $userQuery = "SELECT * FROM users WHERE id=" . $_SESSION["user_id"];
 $userResult = mysqli_query($koneksi, $userQuery);
 $user = mysqli_fetch_assoc($userResult);
+
+// Pagination settings
+$resultsPerPage = 5;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $resultsPerPage;
+
+// Search functionality
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$whereClause = empty($search) ? '' : "WHERE 
+    nama LIKE '%$search%' OR 
+    nik LIKE '%$search%' OR 
+    no_rumah LIKE '%$search%'";
+
+$dataWargaQuery = "SELECT * FROM warga $whereClause ORDER BY nama ASC LIMIT $offset, $resultsPerPage";
+$dataWargaResult = mysqli_query($koneksi, $dataWargaQuery);
+
+// Count total records for pagination
+$countQuery = "SELECT COUNT(*) AS total FROM warga $whereClause";
+$countResult = mysqli_query($koneksi, $countQuery);
+$totalRecords = mysqli_fetch_assoc($countResult)['total'];
+$totalPages = ceil($totalRecords / $resultsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +45,7 @@ $user = mysqli_fetch_assoc($userResult);
 <body>
     <div class="container">
         <header class="header">
-            <h1>Sistem Iuran KAS RT</h1>
+            <h1>Iuran KAS RT Kuadrat</h1>
             <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
         </header>
 
@@ -33,23 +54,87 @@ $user = mysqli_fetch_assoc($userResult);
                 <nav>
                     <ul>
                         <li><a href="#data-warga">Data Warga</a></li>
-                        <li><a href="#transaksi_iuran">Iuran KAS</a></li>
-                        <li><a href="#laporan_transaksi">Laporan Transaksi</a></li>
-                        <li><a href="#belum_bayar">Belum Bayar Iuran</a></li>
-                        <li><a href="#jumlah_kas">Jumlah KAS</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="module/transaksi_iuran.php">Iuran KAS</a></li>
+                        <li><a href="module/laporan_transaksi.php">Laporan Transaksi</a></li>
+                        <li><a href="module/belum_bayar.php">Belum Bayar Iuran</a></li>
+                        <li><a href="module/jumlah_kas.php">Jumlah KAS</a></li>
+                        <li><a href="class/logout.php">Logout</a></li>
                     </ul>
                 </nav>
             </div>
 
-            
-        </div>
+            <section id="data-warga" class="col-9">
+                <form method="get">
+                    <input type="text" name="search" placeholder="Cari..." value="<?php echo $search; ?>">
+                    <button type="submit">Cari</button>
+                </form>
 
+                <a id="tambah-warga-link" href="module/tambah_warga.php">Tambah Warga</a>
+                <h2>Data Warga</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Jenis Kelamin</th>
+                            <th>No HP</th>
+                            <th>Alamat</th>
+                            <th>No Rumah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $nomorBaris = ($page - 1) * $resultsPerPage + 1;
+
+                        while ($row = mysqli_fetch_assoc($dataWargaResult)) {
+                            echo "<tr>";
+                            echo "<td>" . $nomorBaris . "</td>";
+                            echo "<td>" . $row["nik"] . "</td>";
+                            echo "<td>" . $row["nama"] . "</td>";
+                            echo "<td>" . $row["jenis_kelamin"] . "</td>";
+                            echo "<td>" . $row["no_hp"] . "</td>";
+                            echo "<td>" . $row["alamat"] . "</td>";
+                            echo "<td>" . $row["no_rumah"] . "</td>";
+                            echo "<td class='action-buttons'>";
+                            echo "<a class='edit-button' href='ubah_warga.php?id=" . $row['id'] . "'>Ubah</a>";
+                            echo "<a class='delete-button' href='hapus_warga.php?id=" . $row['id'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data?\")'>Hapus</a>";
+                            echo "</td>";
+                            echo "</tr>";
+
+                            $nomorBaris++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+                <!-- Pagination links -->
+                <div class="pagination">
+                    <?php if ($page > 1) : ?>
+                        <a href="?page=<?php echo $page - 1; ?>&search=<?php echo $search; ?>" class="prev">&laquo; Previous</a>
+                    <?php endif; ?>
+
+                    <?php
+                    // Menampilkan maksimal 3 kotak halaman
+                    $startPage = max(1, $page - 1);
+                    $endPage = min($totalPages, $page + 1);
+
+                    for ($i = $startPage; $i <= $endPage; $i++) {
+                        $activeClass = ($i == $page) ? 'active' : '';
+                        echo "<a class='$activeClass' href='?page=$i&search=$search'>$i</a>";
+                    }
+                    ?>
+
+                    <?php if ($page < $totalPages) : ?>
+                        <a href="?page=<?php echo $page + 1; ?>&search=<?php echo $search; ?>" class="next">Next &raquo;</a>
+                    <?php endif; ?>
+                </div>
+            </section>
+        </div>
         <footer>
             <p>&copy; 2024, Teknik Informatika, Universitas Pelita Bangsa, Sistem Iuran Kas RT</p>
         </footer>
     </div>
-
-
 </body>
 </html>

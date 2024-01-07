@@ -63,26 +63,6 @@ body {
     .wrapper {
         flex-direction: column-reverse;
     }
-    .side-bar {
-        margin-left: 0;
-    }
-    .toggle-btn {
-        margin-right: 20px;
-    }
-}
-
-.toggle-btn {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.toggle-btn:hover {
-    background-color: #555;
 }
 
 .col-9 {
@@ -110,14 +90,42 @@ td {
 }
 
 @media only screen and (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+    .wrapper {
+        flex-direction: column;
     }
 
-    th, td {
-        display: inline-block;
+    .side-bar {
+        min-width: 10%;
+        font-size: 14px;
+    }
+
+    .side-bar.closed {
+        margin-left: 0;
+    }
+
+    .col-9 {
+        padding: 14px;
+    }
+
+    table {
+        font-size: 12px;
+        overflow-x: auto;
+        display: block;
+        max-width: 100%;
+    }
+
+    .pagination {
+        margin-top: 10px;
+        overflow-x: auto;
+    }
+
+    .pagination a {
+        padding: 6px 12px;
+        margin: 0 2px;
+    }
+
+    .pagination .active {
+        font-weight: bold;
     }
 }
 
@@ -201,14 +209,13 @@ footer {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#tambah-warga h2 {
-    color: #333;
+    width: 100%; 
 }
 
 #tambah-warga form {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column; 
 }
 
 #tambah-warga label {
@@ -219,12 +226,47 @@ footer {
 
 #tambah-warga input[type="text"],
 #tambah-warga textarea {
-    width: 100%;
+    width: 100%; 
     padding: 10px;
     margin-bottom: 16px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#tambah-warga .gender-checkboxes {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+#tambah-warga .gender-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+#tambah-warga .gender-checkboxes input[type="checkbox"] + label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000;
+    background-color: #fff;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+#tambah-warga .gender-checkboxes input[type="checkbox"]:checked + label:before {
+    content: "\2713";
+    font-size: 16px;
+    color: #000000;
+}
+
+#tambah-warga .gender-checkboxes label {
+    font-size: 16px;
+    color: #333;
+    vertical-align: middle;
+    margin-right: 8px;
+    cursor: pointer;
 }
 
 #tambah-warga button {
@@ -237,6 +279,56 @@ footer {
 }
 
 #tambah-warga button:hover {
+    background-color: #555;
+}
+
+#tambah-iuran {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+}
+
+#tambah-iuran h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#tambah-iuran form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; 
+}
+
+#tambah-iuran label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#tambah-iuran input[type="date"],
+#tambah-iuran select,
+#tambah-iuran input[type="text"],
+#tambah-iuran textarea {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#tambah-iuran button {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#tambah-iuran button:hover {
     background-color: #555;
 }
 
@@ -275,55 +367,6 @@ footer {
 
 .gender-checkboxes label:hover {
     cursor: pointer;
-}
-
-#tambah-iuran {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for form title */
-#tambah-iuran h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Style for form elements */
-#tambah-iuran form {
-    margin-top: 20px;
-}
-
-#tambah-iuran label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-#tambah-iuran input[type="date"],
-#tambah-iuran select,
-#tambah-iuran input[type="text"],
-#tambah-iuran textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#tambah-iuran button {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#tambah-iuran button:hover {
-    background-color: #555;
 }
 
 #ubah-warga {
@@ -431,8 +474,6 @@ footer {
     color: #333;
 }
 
-#ubah-transaksi input[type="date"],
-#ubah-transaksi select,
 #ubah-transaksi input[type="text"],
 #ubah-transaksi textarea {
     width: 100%;
@@ -455,7 +496,6 @@ footer {
 #ubah-transaksi button:hover {
     background-color: #555;
 }
-
 .jenis-iuran-checkboxes input[type="checkbox"] {
     display: none;
 }
@@ -488,7 +528,6 @@ footer {
     cursor: pointer;
 }
 
-/* tabel transaksi */
 #transaksi-iuran {
     padding: 20px;
 }
@@ -520,7 +559,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel laporan */
 #laporan-transaksi {
     padding: 20px;
 }
@@ -552,7 +590,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel belum bayar */
 #belum-bayar {
     padding: 20px;
 }
@@ -584,7 +621,6 @@ footer {
     background-color: #ddd;
 }
 
-/* tabel jumlah kas */
 #jumlah-kas {
     padding: 20px;
 }
@@ -640,4 +676,46 @@ footer {
 
 #data-warga tbody tr:hover {
     background-color: #ddd;
+}
+
+form {
+    position: relative;
+    display: flex;
+    justify-content:flex-end;
+}
+
+input[type="text"] {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+button {
+    padding: 6px 10px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: #fff;
+    pointer-events: none;
 }

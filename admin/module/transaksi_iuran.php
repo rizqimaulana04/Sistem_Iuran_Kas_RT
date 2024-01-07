@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Iuran KAS RT - Transaksi Iuran</title>
-    <link rel="stylesheet" type="text/css" href="../css/user.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
     <div class="container">
@@ -84,11 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="side-bar">
                 <nav>
                     <ul>
-                        <li><a href="../dashboard.php">Dashboard</a></li>
-                        <li><a href="../user.php">Data Warga</a></li>
-                        <li><a href="transaksi_iuran_user.php">Iuran KAS</a></li>
-                        <li><a href="belum_bayar_user.php">Belum Bayar Iuran</a></li>
-                        <li><a href="jumlah_kas_user.php">Jumlah KAS</a></li>
+                        <li><a href="../admin.php">Data Warga</a></li>
+                        <li><a href="transaksi_iuran.php">Iuran KAS</a></li>
+                        <li><a href="laporan_transaksi.php">Laporan Transaksi</a></li>
+                        <li><a href="belum_bayar.php">Belum Bayar Iuran</a></li>
+                        <li><a href="jumlah_kas.php">Jumlah KAS</a></li>
                         <li><a href="../class/logout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -100,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit">Cari</button>
                 </form>
 
+                <a id="tambah-iuran-link" href="tambah_iuran.php">Tambah Iuran</a>
                 <h2>Transaksi Iuran</h2>
                 <table>
                     <thead>
@@ -110,6 +111,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <th>Nominal</th>
                             <th>Keterangan</th>
                             <th>Jenis Iuran</th>
+                            <th>Aksi</th>
+                            <!-- Add more columns as needed -->
                         </tr>
                     </thead>
                     <tbody>
@@ -124,9 +127,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<td>" . $row["nominal"] . "</td>";
                             echo "<td>" . $row["keterangan"] . "</td>";
                             echo "<td>" . $row["jenis_iuran"] . "</td>";
+                            echo "<td class='action-buttons'>";
+                            echo "<a class='edit-button' href='ubah_transaksi.php?id=" . $row['id'] . "'>Ubah</a>";
+                            echo "<a class='delete-button' href='hapus_transaksi.php?id=" . $row['id'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data?\")'>Hapus</a>";
+                            echo "</td>";
+                            // Add more columns as needed
                             echo "</tr>";
 
-                            $nomorBaris++; 
+                            $nomorBaris++; // Increment the row number
                         }
                         ?>
                     </tbody>

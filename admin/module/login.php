@@ -5,7 +5,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Include file koneksi
-    include 'class/koneksi.php';
+    include '../../class/koneksi.php';
 
     // Ambil data dari formulir
     $username = $_POST["username"];
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["role"] = $row["role"];
 
             // Redirect ke halaman yang sesuai dengan role
-            $redirectPage = ($_SESSION["role"] == 1) ? 'admin/admin.php' : 'user/user.php';
+            $redirectPage = ($_SESSION["role"] == 1) ? '../admin.php' : '../../user/dashboard.php';
             header("Location: $redirectPage");
             exit();
         } else {
@@ -44,11 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="../../css/login.css">
 </head>
 <body class="login-body">
     <div class="header">
-        <h1>Sistem Iuran Kas RT</h1>
+        <h1>Kas RT Kuadrat</h1>
     </div>
     
     <div class="login-container">

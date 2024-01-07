@@ -1,3 +1,53 @@
+# Sistem Iuran Kas RT
+
+|  Anggota Kelompok  |
+|----------------|
+|Muhammad Rizqi Maulana|
+|Muhammad Riyadus Solihin|
+|Sandy Ramadhan|
+|      |
+
+## Daftar Isi
+
+- [Video Penjelasan Projek](#link-youtube-video-dan-tampilan-web)
+- [Class Diagram](#class-diagram)
+- [Database](#database-users-warga-iuran)
+    - [Users](#users)
+    - [Warga](#warga)
+    - [Iuran](#iuran)
+- [Halaman Login](#halaman-login-dan-registrasi)
+    - [Koneksi](#koneksi)
+    - [Login](#login)
+    - [Registrasi](#registrasi)
+    - [Tampilan Form Login](#tampilan-form-login-dan-registrasi)
+- [Halaman Admin](#halaman-admin)
+    - [Tampilan Halaman Admin](#tampilan-halaman-admin)
+- [Halaman User](#halaman-user)
+    - [Tampilan Dashboard User](#tampilan-dashboard-user)
+- [Demo WEB](#demo-tampilan-web)
+
+## Link Youtube Video dan Tampilan Web
+- [Web Kas Kuadrat](http://kaskuadrat.wuaze.com/)
+- [Link Video Penjelasan Projek](...)
+- [Folder PDF]()
+
+## Class Diagram
+<b>Sistem Iuran Kas RT</b>
+- Mengelola Data Warga (CRUD)
+    - Menampilkan Data Warga
+    - Tambah Warga
+    - Ubah dan Hapus Warga
+- Transaksi Iuran Warga
+    - Daftar Kas Warga
+    - Tambah Iuran Warga
+- Laporan Transaksi
+    - Data Warga yang belum membayar Iuran (perbulan/pertahun, dan filter jenis_iuran)
+    - Data Jumlah KAS (bulanan/tahunan)<br>
+
+![img](image/class_diagram.png)
+
+[**BACK**](#daftar-isi)
+
 ## Halaman Login dan Registrasi
 
 |  |  |  |
@@ -5,10 +55,9 @@
 |Nama|Sandy Ramadhan|
 |NIM|312210633|
 |Kelas|TI.22.A.4|
-|Mata Kuliah|Pemograman Web|
 |  |  |  |
 
-### Database **users. Warga, Iuran**
+### Database Users, Warga, Iuran
 
 - Users
     ```sql
@@ -68,6 +117,12 @@
     ) ENGINE = InnoDB;
 
     ```
+
+**Keterangan**
+- `status` (1: Aktif, 2: Non Aktif)
+- `role` (1: Admin, 2: User)
+- `jenis_iuran` (1: Kas, 2: Sampah, 3: Sumbangan) => 4: boleh ditambahkan yang komponen lainnya
+
 ### Koneksi
 
 ```php
@@ -263,9 +318,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ### Tampilan form Login dan Registrasi
 https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115614173/2d19fe4a-0288-4010-8fcc-26342f785001
 
+[**BACK**](#daftar-isi)
+
+## Halaman Admin
+
+|  |  |  |
+|-----|------|-----|
+|Nama|Muhammad Rizqi Maulana|
+|NIM|312210360|
+|Kelas|TI.22.A.4|
+|  |  |  |
+
+### Tampilan Halaman Admin
+https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115638135/d9519596-6010-4f07-94b1-aeabf434b675
+
+1. **Header**:<br> 
+Menampilkan judul "Iuran KAS RT Kuadrat" dan menyambut pengguna yang telah login. Informasi ini diambil dari data pengguna yang tersimpan di sesi setelah login.
+2. **Side Bar Navigation**:<br> Menampilkan menu navigasi untuk mengakses berbagai fitur dalam sistem, antara lain:<br>
+
+    - Data Warga
+        - Menu ini membawa pengguna ke bagian yang menampilkan data lengkap mengenai warga RT.
+        - Dalam bagian ini, pengguna dapat mencari data warga berdasarkan nama, NIK, atau nomor rumah.
+        - Terdapat juga tombol untuk menambahkan data warga baru.
+        - Contoh File:
+            - [data_warga.php](admin/admin.php)
+            - [tambah_warga.php](admin/module/tambah_warga.php)
+            - [ubah_warga.php](admin/module/ubah_warga.php)
+            - [hapus_warga.php](admin/module/hapus_warga.php)
+            
+    - Iuran KAS
+        - Link ini mengarahkan pengguna ke halaman untuk melakukan pencatatan iuran KAS.
+        - Admin dapat mengelola transaksi iuran warga melalui fitur ini.
+        - Contoh FIle:
+            - [transaksi_iuran.php](admin/module/transaksi_iuran.php)
+            - [tambah_iuran.php](admin/module/tambah_iuran.php)
+            - [ubah_transaksi.php](admin/module/ubah_transaksi.php)
+            - [hapus_transaksi.php](admin/module/hapus_transaksi.php)
+
+    - Laporan Transaksi
+        - Pengguna dapat melihat laporan transaksi iuran KAS pada halaman ini.
+        - Laporan ini memberikan ringkasan mengenai iuran yang telah dilakukan.
+        - Contoh File:
+            - [laporan_transaksi.php](admin/module/laporan_transaksi.php)
+
+    - Daftar Belum Bayar Iuran
+        - Halaman ini menyajikan daftar warga yang belum melakukan pembayaran iuran.
+        - Admin dapat memantau dan mengelola data iuran yang masih tertunggak.
+        - Contoh File:
+            - [belum_bayar.php](admin/module/belum_bayar.php)
+    - Jumlah KAS
+        - Link ini membawa pengguna ke halaman yang menampilkan informasi mengenai total jumlah KAS yang terkumpul.
+        - Admin dapat melihat dan mengelola jumlah dana yang telah terkumpul.
+        - Contoh File:
+            - [jumlah_kas.php](admin/module/jumlah_kas.php)
+    - Logout
+        - Opsi untuk logout dari sistem.
+        - Pengguna dapat keluar dari sesi admin dan kembali ke halaman login.
+        - Contoh File:
+            - [logout.php](admin/class/logout.php)
+
+3. **Footer**:<br> 
+Menyertakan informasi hak cipta, tahun, dan asal sistem.
+
+[**BACK**](#daftar-isi)
 
 ## Halaman user
-<h2> Halaman user </h2>
 
 |  |  |  |
 |-----|------|-----|
@@ -594,55 +711,57 @@ Sintaks php diatas ditaruh disetiap beberapa file untuk memanggil database dari 
 - Jumlah Kas
 
     ```HTML
-        <div class="container">
-            <header class="header">
-                <h1>Sistem Iuran KAS RT</h1>
-                <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
-            </header>
-
-            <div class="wrapper">
-                <div class="side-bar">
-                    <nav>
-                        <ul>
-                            <li><a href="dashboard.php">Dashboard</a></li>
-                            <li><a href="../user.php#data-warga">Data Warga</a></li>
-                            <li><a href="transaksi_iuran_user.php">Iuran KAS</a></li>
-                            <li><a href="laporan_transaksi_user.php">Laporan Transaksi</a></li>
-                            <li><a href="belum_bayar_user.php">Belum Bayar Iuran</a></li>
-                            <li><a href="jumlah_kas_user.php">Jumlah KAS</a></li>
-                            <li><a href="../class/logout.php">Logout</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <section id="jumlah-kas" class="col-9">
-                    <h2>Jumlah KAS</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Jenis</th>
-                                <th>Nominal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Uang Masuk</td>
-                                <td>Rp <?php echo number_format($totalMasuk, 2, ',', '.'); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Uang Keluar</td>
-                                <td>Rp <?php echo number_format($totalKeluar, 2, ',', '.'); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td>Rp <?php echo number_format($totalKas, 2, ',', '.'); ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+    <div class="container">
+        <header class="header">
+            <h1>Sistem Iuran KAS RT</h1>
+            <p>Selamat datang, <?php echo $user["nama"]; ?>!</p>
+        </header>
+        <div class="wrapper">
+            <div class="side-bar">
+                <nav>
+                    <ul>
+                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="../user.php#data-warga">Data Warga</a></li>
+                        <li><a href="transaksi_iuran_user.php">Iuran KAS</a></li>
+                        <li><a href="laporan_transaksi_user.php">Laporan Transaksi</a></li>
+                        <li><a href="belum_bayar_user.php">Belum Bayar Iuran</a></li>
+                        <li><a href="jumlah_kas_user.php">Jumlah KAS</a></li>
+                        <li><a href="../class/logout.php">Logout</a></li>
+                    </ul>
+                </nav>
             </div>
+            <section id="jumlah-kas" class="col-9">
+                <h2>Jumlah KAS</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jenis</th>
+                            <th>Nominal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Uang Masuk</td>
+                            <td>Rp <?php echo number_format($totalMasuk, 2, ',', '.'); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Uang Keluar</td>
+                            <td>Rp <?php echo number_format($totalKeluar, 2, ',', '.'); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>Rp <?php echo number_format($totalKas, 2, ',', '.'); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+    </div>
     ```
 
-<h2>Tampilan Halaman User</h2>
-https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/116700346/ee99dbb5-e696-4f65-b8bf-ba0d0e94de43
-=======
+### Tampilan Dashboard User
+https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115638135/f0a7b11f-5e62-4aed-9144-c3866c047f8d
+
+[**BACK**](#daftar-isi)
+
+### Demo Tampilan Web
+https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115638135/21be2871-bcef-44fe-bf94-7c731be57cc7

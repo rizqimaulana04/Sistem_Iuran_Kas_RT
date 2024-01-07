@@ -6,7 +6,7 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-include 'koneksi.php';
+include '../../class/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $transaksiId = $_GET["id"];
@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $updateTransaksiQuery = "UPDATE iuran SET tanggal='$tanggal', warga_id='$warga_id', nominal='$nominal', keterangan='$keterangan', jenis_iuran='$jenis_iuran' WHERE id = $transaksiId";
 
     if (mysqli_query($koneksi, $updateTransaksiQuery)) {
-        header("Location: transaksi_iuran.php");
+        header("Location: ../module/transaksi_iuran.php");
     } else {
         echo "Error: " . $updateTransaksiQuery . "<br>" . mysqli_error($koneksi);
     }
 } else {
-    header("Location: transaksi_iuran.php");
+    header("Location: ../module/transaksi_iuran.php");
 }
 ?>
