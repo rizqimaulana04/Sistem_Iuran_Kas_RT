@@ -2,9 +2,9 @@
 
 |  Anggota Kelompok  |
 |----------------|
-|Muhammad Rizqi Maulana|
-|Muhammad Riyadus Solihin|
-|Sandy Ramadhan|
+|Muhammad Rizqi Maulana (312210360)|
+|Muhammad Riyadus Solihin (312210404)|
+|Sandy Ramadhan (312210633)|
 |      |
 
 ## Daftar Isi
@@ -28,8 +28,8 @@
 
 ## Link Youtube Video dan Tampilan Web
 - [Web Kas Kuadrat](http://kaskuadrat.wuaze.com/)
-- [Link Video Penjelasan Projek](...)
-- [Folder PDF]()
+- [Link Video Penjelasan Projek](https://youtu.be/-dl16q6aUQc?si=k5lPXDQ1PGHy8HCi)
+- [Folder PDF](kasrt.pdf)
 
 ## Class Diagram
 <b>Sistem Iuran Kas RT</b>
