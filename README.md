@@ -2,28 +2,34 @@
 
 |  Anggota Kelompok  |
 |----------------|
-|[Muhammad Rizqi Maulana](Halaman-Admin)|
-|[Muhammad Riyadus Solihin](Halaman-User)|
-|[Sandy Ramadhan](Halaman-Login-dan-Registrasi)|
+|Muhammad Rizqi Maulana|
+|Muhammad Riyadus Solihin|
+|Sandy Ramadhan|
 |      |
 
 ## Daftar Isi
 
-- [Video Penjelasan Projek](...)
-- [Class Diagram](Class-Diagram)
-- [Database](Database)
-    - [Users](Users)
-    - [Warga](Warga)
-    - [Iuran](Iuran)
-- [Halaman Login](Halaman-Login-dan-Registrasi)
-    - [Koneksi](Koneksi)
-    - [Login](Login)
-    - [Registrasi](Registrasi)
-- [Halaman Admin](Halaman-Admin)
-- [Halaman User](Halaman-User)
+- [Video Penjelasan Projek](#link-youtube-video-dan-tampilan-web)
+- [Class Diagram](#class-diagram)
+- [Database](#database-users-warga-iuran)
+    - [Users](#users)
+    - [Warga](#warga)
+    - [Iuran](#iuran)
+- [Halaman Login](#halaman-login-dan-registrasi)
+    - [Koneksi](#koneksi)
+    - [Login](#login)
+    - [Registrasi](#registrasi)
+    - [Tampilan Form Login](#tampilan-form-login-dan-registrasi)
+- [Halaman Admin](#halaman-admin)
+    - [Tampilan Halaman Admin](#tampilan-halaman-admin)
+- [Halaman User](#halaman-user)
+    - [Tampilan Dashboard User](#tampilan-dashboard-user)
+- [Demo WEB](#demo-tampilan-web)
 
-## Link Youtube Video
-- [Video Penjelasan Projek](...)
+## Link Youtube Video dan Tampilan Web
+- [Web Kas Kuadrat](http://kaskuadrat.wuaze.com/)
+- [Link Video Penjelasan Projek](...)
+- [Folder PDF]()
 
 ## Class Diagram
 <b>Sistem Iuran Kas RT</b>
@@ -40,7 +46,7 @@
 
 ![img](image/class_diagram.png)
 
-[**BACK**](Daftar-Isi)
+[**BACK**](#daftar-isi)
 
 ## Halaman Login dan Registrasi
 
@@ -51,7 +57,7 @@
 |Kelas|TI.22.A.4|
 |  |  |  |
 
-### Database **users. Warga, Iuran**
+### Database Users, Warga, Iuran
 
 - Users
     ```sql
@@ -312,7 +318,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ### Tampilan form Login dan Registrasi
 https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115614173/2d19fe4a-0288-4010-8fcc-26342f785001
 
-[**BACK**](Daftar-Isi)
+[**BACK**](#daftar-isi)
 
 ## Halaman Admin
 
@@ -334,25 +340,47 @@ Menampilkan judul "Iuran KAS RT Kuadrat" dan menyambut pengguna yang telah login
         - Menu ini membawa pengguna ke bagian yang menampilkan data lengkap mengenai warga RT.
         - Dalam bagian ini, pengguna dapat mencari data warga berdasarkan nama, NIK, atau nomor rumah.
         - Terdapat juga tombol untuk menambahkan data warga baru.
+        - Contoh File:
+            - [data_warga.php](admin/admin.php)
+            - [tambah_warga.php](admin/module/tambah_warga.php)
+            - [ubah_warga.php](admin/module/ubah_warga.php)
+            - [hapus_warga.php](admin/module/hapus_warga.php)
+            
     - Iuran KAS
         - Link ini mengarahkan pengguna ke halaman untuk melakukan pencatatan iuran KAS.
         - Admin dapat mengelola transaksi iuran warga melalui fitur ini.
+        - Contoh FIle:
+            - [transaksi_iuran.php](admin/module/transaksi_iuran.php)
+            - [tambah_iuran.php](admin/module/tambah_iuran.php)
+            - [ubah_transaksi.php](admin/module/ubah_transaksi.php)
+            - [hapus_transaksi.php](admin/module/hapus_transaksi.php)
+
     - Laporan Transaksi
         - Pengguna dapat melihat laporan transaksi iuran KAS pada halaman ini.
         - Laporan ini memberikan ringkasan mengenai iuran yang telah dilakukan.
+        - Contoh File:
+            - [laporan_transaksi.php](admin/module/laporan_transaksi.php)
+
     - Daftar Belum Bayar Iuran
         - Halaman ini menyajikan daftar warga yang belum melakukan pembayaran iuran.
         - Admin dapat memantau dan mengelola data iuran yang masih tertunggak.
+        - Contoh File:
+            - [belum_bayar.php](admin/module/belum_bayar.php)
     - Jumlah KAS
         - Link ini membawa pengguna ke halaman yang menampilkan informasi mengenai total jumlah KAS yang terkumpul.
         - Admin dapat melihat dan mengelola jumlah dana yang telah terkumpul.
+        - Contoh File:
+            - [jumlah_kas.php](admin/module/jumlah_kas.php)
     - Logout
         - Opsi untuk logout dari sistem.
         - Pengguna dapat keluar dari sesi admin dan kembali ke halaman login.
+        - Contoh File:
+            - [logout.php](admin/class/logout.php)
+
 3. **Footer**:<br> 
 Menyertakan informasi hak cipta, tahun, dan asal sistem.
 
-[**BACK**](Daftar-Isi)
+[**BACK**](#daftar-isi)
 
 ## Halaman user
 
@@ -733,4 +761,7 @@ Sintaks php diatas ditaruh disetiap beberapa file untuk memanggil database dari 
 ### Tampilan Dashboard User
 https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115638135/f0a7b11f-5e62-4aed-9144-c3866c047f8d
 
-[**BACK**](Daftar-Isi)
+[**BACK**](#daftar-isi)
+
+### Demo Tampilan Web
+https://github.com/rizqimaulana04/Sistem_Iuran_Kas_RT/assets/115638135/21be2871-bcef-44fe-bf94-7c731be57cc7
